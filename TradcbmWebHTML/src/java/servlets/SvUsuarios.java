@@ -49,7 +49,7 @@ public class SvUsuarios extends HttpServlet {
                 case "ingresar": {
                     misDatos = new DatosUsuario();
                     Gson gson = new Gson();
-                    String Json = gson.toJson(misDatos.LogUsuario(idusuarios, password));
+                    String Json = gson.toJson(misDatos.ValidaUsuario(idusuarios, password));
                     out.print(Json);
                     break;
                 }
@@ -73,7 +73,8 @@ public class SvUsuarios extends HttpServlet {
                 }
                 case "eliminar": {
                     misDatos = new DatosUsuario();
-                    misDatos.eliminarUsuario(idusuarios);
+                    Usuarios usubd = misDatos.getUsuario(idusuarios);
+                    misDatos.eliminarUsuario(usubd);
                     break;
                 }
                 case "consultar": {

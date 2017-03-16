@@ -1,10 +1,21 @@
-/* global myJson */
+myJson = "";
 
 $(document).ready(function() {
     //Carga de componentes
     $("body").css("background-image", "url('lib/img/intro.jpg')");
     $('#footer').load('contenido/footer.html');
 
+    perfil();
+
+    function perfil() {
+        perfillog = localStorage.getItem("perfil");
+        console.log(myJson);
+        if (perfillog === "Administrador") {
+            $('#cabecera').load('contenido/header.html');
+        } else {
+            $('#cabecera').load('contenido/headerempl.html');
+        }
+    }
     //Animación de entrada
     $('#target').animate({
         width: "700px"
@@ -16,6 +27,10 @@ $(document).ready(function() {
 
     //Función de listar para la vista de listado de usuarios
     listar();
+    $('#tblNuevo').click(function() {
+        MostrarOcultar();
+
+    });
 
     //Al pulsar mostrar oculta el formulario y muestra el listado
     $('#listar').click(function(e) {
@@ -31,6 +46,7 @@ $(document).ready(function() {
     ;
 
 
+    //Función ingresar al sistema
     $('#ingresar').click(function(e) {
         e.preventDefault();
         $.post('SvUsuarios', {
@@ -59,10 +75,8 @@ $(document).ready(function() {
         perfil = myJson.perfil;
         password = myJson.password;
         localStorage.setItem("nombre", myJson.nombre);
-        if (perfil === "Administrador")
-            window.location.href = "MenuAdministrador.html";
-        if (perfil === "Empleado")
-            window.location.href = "MenuEmpleado.html";
+        localStorage.setItem("perfil", myJson.perfil);
+        window.location.href = "Portada.html";
     }
     ;
     function logIncorrecto() {
@@ -98,7 +112,6 @@ $(document).ready(function() {
                             showLoaderOnConfirm: true});
                     } else {
                         MostrarOcultar();
-
                     }
                 });
     }
@@ -129,7 +142,6 @@ $(document).ready(function() {
             opcion: "eliminar"
         });
     }
-
     //Función de borrar usuario + validacón
     $('#borrar').click(function() {
         validar_Borrar();
@@ -167,14 +179,12 @@ $(document).ready(function() {
 
     //Función para listar los usuarios en la vista de listadoUsuarios.jsp
     function listar() {
-
         $.post('SvUsuarios', {
             opcion: "listar",
             method: 'post',
             dataType: 'json'},
                 function(data) {
                     myJson = $.parseJSON(data);
-
                     table = $('#tabla').dataTable({
                         data: myJson,
                         columns: [
@@ -199,7 +209,6 @@ $(document).ready(function() {
                 });
     }
     ;
-
     var Espanol = {
         "sProcessing": "Procesando...",
         "sLengthMenu": "Mostrar _MENU_ registros",
@@ -295,7 +304,7 @@ $(document).ready(function() {
                 error.html(error.text()).addClass('spanerror').insertAfter(element).hide().fadeIn();
             },
             //Funcionalidad para el botón de envío
-            submitHandler: function() {
+            submitHandler: function(form) {
                 nuevo();
             }
         });

@@ -159,18 +159,21 @@ table.dataTable thead th, table.dataTable thead td {
 /*quitar flechas arriba-abajo del sort*/
 table.dataTable thead .sorting{
     background-image: none;
+    padding: 10px;
 }
 table.dataTable thead .sorting_desc {
     background-image: none;
+    padding: 10px;
 }
 table.dataTable thead .sorting_asc {
     background-image: none;
+    padding: 10px;
 }
 /*cambiar fondo de paginación*/
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     background-color: grey;
 }
-/*Animación inicial*/ 
+/*Animación inicial*/
 .playground {
     width: 100px;
     height: 100px;

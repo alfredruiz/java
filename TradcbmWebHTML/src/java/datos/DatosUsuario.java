@@ -11,22 +11,22 @@ import java.util.logging.Logger;
 
 public class DatosUsuario {
 
-    private Connection con;
+    //Conectar a la base de datos
+    private final Conexion conex = new Conexion();
+    private final Connection con = conex.Conectar();
+    private String mysql="";
     private ResultSet rs;
     private PreparedStatement pst;
     private Usuarios usu;
-    //Conectar a la base de datos
-    Conexion conex = new Conexion();
 
 
-    public Usuarios LogUsuario(String idusuarios, String password) {
-        usu = null;
+    public Usuarios ValidaUsuario(String idusuarios, String password) {
         try {
-            String sql = "select * from usuarios where idusuarios= ? and password= ?";
-            pst = conex.con.prepareStatement(sql);
+            mysql = "select * from usuarios where idusuarios= ? and password= ?";
+            pst = con.prepareStatement(mysql);
             pst.setString(1, idusuarios);
             pst.setString(2, password);
-            rs = pst.executeQuery();
+            rs = pst.executeQuery(); 
             if (rs.next()) {
                 usu = new Usuarios(
                         rs.getString("idusuarios"), rs.getString("nombre"),
@@ -34,8 +34,8 @@ public class DatosUsuario {
                         rs.getString("password"), rs.getString("perfil"));
             }
             return usu;
-        } catch (SQLException ex) {
-            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, e);
             return null;
         }
     }
@@ -43,8 +43,8 @@ public class DatosUsuario {
     public Usuarios getUsuario(String idusuarios) {
         usu = null;
         try {
-            String sql = "select * from usuarios where idusuarios= ? ";
-            pst = conex.con.prepareStatement(sql);
+            mysql = "select * from usuarios where idusuarios= ? ";
+            pst = con.prepareStatement(mysql);
             pst.setString(1, idusuarios);
             rs = pst.executeQuery();
             if (rs.next()) {
@@ -54,78 +54,72 @@ public class DatosUsuario {
                         rs.getString("password"), rs.getString("perfil"));
             }
             return usu;
-        } catch (SQLException ex) {
-            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, e);
             return null;
         }
-    }
-
-    public ResultSet AllUsuarios() {
-        usu = null;
-        try {
-            String sql = "select * from usuarios";
-            pst = conex.con.prepareStatement(sql);
-            return pst.executeQuery();
-        } catch (SQLException ex) {
-            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
+    } 
     
-    public void nuevoUsuario(Usuarios usu) {
+    public boolean nuevoUsuario(Usuarios usu) {
         try {
-            String sql = "Insert into usuarios(idusuarios,nombre,apellidos,email,"
+            mysql = "Insert into usuarios(idusuarios,nombre,apellidos,email,"
                     + "password,perfil)values(?,?,?,?,?,?)";
-            pst = conex.con.prepareStatement(sql);
+            pst = con.prepareStatement(mysql);
             pst.setString(1, usu.getIdusuarios());
             pst.setString(2, usu.getNombre());
             pst.setString(3, usu.getApellidos());
             pst.setString(4, usu.getEmail());
             pst.setString(5, usu.getPassword());
             pst.setString(6, usu.getPerfil());
-            pst.executeUpdate(); 
-            pst.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);  
+            int us = pst.executeUpdate();
+            return us!=0; 
+        } catch (SQLException e) {
+            conex.CerrarConexion();
+            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, e); 
+            return false;
         }
     }
 
-    public void modificarUsuario(Usuarios usu) {
+    public boolean modificarUsuario(Usuarios usu) {
         try {
-            String sql = "UPDATE usuarios SET nombre = ?, apellidos= ?,email=?, password = ?, perfil= ? WHERE idusuarios = ?";
-            pst = conex.con.prepareStatement(sql);
+            mysql = "UPDATE usuarios SET nombre = ?, apellidos= ?,email=?, password = ?, perfil= ? WHERE idusuarios = ?";
+            pst = con.prepareStatement(mysql);
             pst.setString(1, usu.getNombre());
             pst.setString(2, usu.getApellidos());
             pst.setString(3, usu.getEmail());
             pst.setString(4, usu.getPassword());
             pst.setString(5, usu.getPerfil());
             pst.setString(6, usu.getIdusuarios());
-            pst.executeUpdate();
-            pst.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            int us= pst.executeUpdate();
+            return us!=0;     
+        } catch (SQLException e) {
+            conex.CerrarConexion();
+            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, e);
+            return false;
         }
     }
-
-    public void eliminarUsuario(String idusuarios) {
+     public boolean eliminarUsuario(Usuarios usu) {
         try {
-            String sql = "delete from usuarios where idusuarios= ? ";
-            pst = conex.con.prepareStatement(sql);
-            pst.setString(1, idusuarios);
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            mysql = "delete from usuarios where idusuarios= ? ";
+            pst = con.prepareStatement(mysql);   
+            pst.setString(1, usu.getIdusuarios());
+            int us= pst.executeUpdate();
+            return us!=0;  
+          
+        } catch (SQLException e) {
+            conex.CerrarConexion();
+            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, e);
+            return false;
         }
-    }
+    } 
 
     public ArrayList<Usuarios> getAllUsuarios() {
 
-        ArrayList<Usuarios> listausu = new ArrayList<>();
-        usu = null;
+        ArrayList<Usuarios> listausu = new ArrayList<>(); 
         try {
 
             String sql = "select * from usuarios";
-            pst = conex.con.prepareStatement(sql);
+            pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
                 usu = new Usuarios();
@@ -137,10 +131,24 @@ public class DatosUsuario {
                 usu.setPerfil(rs.getString("perfil"));
                 listausu.add(usu);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return listausu;
+            conex.CerrarConexion();
+            return listausu;
+        } catch (SQLException e) {
+            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, e);
+            return null;
+        } 
     }
 }
- 
+
+//    public ResultSet AllUsuarios() { 
+//        try {
+//            usu = null;
+//            mysql = "select * from usuarios";
+//            pst = con.prepareStatement(mysql);
+//            return pst.executeQuery();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(DatosUsuario.class.getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//    }
+//    
