@@ -1,4 +1,4 @@
- 
+
 package Vistas;
 
 import Clases.ImagenFondo;
@@ -20,11 +20,11 @@ public class FormInicio extends javax.swing.JFrame {
         this.setTitle("Tradcbm");
         //Llamammos a la clase imagenfondo
         Principal.setBorder(new ImagenFondo());
-        //Expandimos ancho y alto 
+        //Expandimos ancho y alto
         this.setExtendedState(FormInicio.MAXIMIZED_BOTH);
         lbperfil.setVisible(false);
         //Desplazamos el menu de bienvenida para que esté a la derecha
-        menuBar.add(Box.createHorizontalGlue());         
+        menuBar.add(Box.createHorizontalGlue());
         menuBar.add(MenuLogin);
     }
 
@@ -46,7 +46,7 @@ public class FormInicio extends javax.swing.JFrame {
         saveMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
+        MenuCompras = new javax.swing.JMenuItem();
         MenuInpuestos = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
@@ -83,6 +83,11 @@ public class FormInicio extends javax.swing.JFrame {
         openMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/clientes.png"))); // NOI18N
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Clientes");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         MenuAdministracion.add(openMenuItem);
 
         saveMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
@@ -100,18 +105,23 @@ public class FormInicio extends javax.swing.JFrame {
         saveAsMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/proveedores.png"))); // NOI18N
         saveAsMenuItem.setMnemonic('a');
         saveAsMenuItem.setText("Proveedores");
-        MenuAdministracion.add(saveAsMenuItem);
-
-        exitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        exitMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/compras2.png"))); // NOI18N
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Compras");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        saveAsMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
+                saveAsMenuItemActionPerformed(evt);
             }
         });
-        MenuAdministracion.add(exitMenuItem);
+        MenuAdministracion.add(saveAsMenuItem);
+
+        MenuCompras.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        MenuCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/compras2.png"))); // NOI18N
+        MenuCompras.setMnemonic('x');
+        MenuCompras.setText("Compras");
+        MenuCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuComprasActionPerformed(evt);
+            }
+        });
+        MenuAdministracion.add(MenuCompras);
 
         menuBar.add(MenuAdministracion);
 
@@ -204,23 +214,34 @@ public class FormInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0); //Salir de la aplicación
-    }//GEN-LAST:event_exitMenuItemActionPerformed
+    private void MenuComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuComprasActionPerformed
+            //Instancia del formulario usuarios
+            FormCompras formComp = new FormCompras();
+            Principal.add(formComp); //Añado el formulario al desktop
+            formComp.toFront(); //Lo traigo al frente
+            formComp.setVisible(true);    }//GEN-LAST:event_MenuComprasActionPerformed
 
     private void jMenuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUsuariosActionPerformed
-            //Instancia del formulario usuarios
-            FormUsuarios formusu = new FormUsuarios();
-            Principal.add(formusu); //Añado el formulario al desktop
-            formusu.toFront(); //Lo traigo al frente
-            formusu.setVisible(true);
-            
+        //Instancia del formulario usuarios
+        FormUsuarios formusu = new FormUsuarios();
+        Principal.add(formusu); //Añado el formulario al desktop
+        formusu.toFront(); //Lo traigo al frente
+        formusu.setVisible(true);
+
     }//GEN-LAST:event_jMenuUsuariosActionPerformed
 
     private void MenuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuSalirMouseClicked
         // Salir del sistema
-          System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_MenuSalirMouseClicked
+
+    private void saveAsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveAsMenuItemActionPerformed
+
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_openMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +250,7 @@ public class FormInicio extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -260,6 +281,7 @@ public class FormInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JMenu MenuAdministracion;
     private javax.swing.JMenu MenuAyuda;
+    private javax.swing.JMenuItem MenuCompras;
     private javax.swing.JMenu MenuIcono;
     private javax.swing.JMenu MenuInformes;
     private javax.swing.JMenu MenuInpuestos;
@@ -271,7 +293,6 @@ public class FormInicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuUsuarios;
     public static javax.swing.JLabel lbperfil;

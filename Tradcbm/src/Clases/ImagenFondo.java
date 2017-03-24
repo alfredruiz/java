@@ -14,32 +14,33 @@ import javax.swing.border.Border;
  * @author Ana
  */
 public class ImagenFondo implements Border {
-    
-     //Almacena la imagen en la memoria del sistema
-     public BufferedImage imagen;
- 
-    public ImagenFondo(){
+
+    //Almacena la imagen en la memoria del sistema
+    public BufferedImage imagen;
+
+    public ImagenFondo() {
         try {
             URL imagePath = new URL(getClass().getResource("../Archivos/intro.jpg").toString());
             imagen = ImageIO.read(imagePath);
-        } catch (IOException ex) {   
+        } catch (IOException ex) {
             ex.getMessage();
         }
     }
+
     //Pintamos los bordes
     @Override
-     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-        g.drawImage(imagen, (x + (width - imagen.getWidth())/2),(y + (height - imagen.getHeight())/2), null);
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        g.drawImage(imagen, (x + (width - imagen.getWidth()) / 2), (y + (height - imagen.getHeight()) / 2), null);
     }
- 
-     @Override
+
+    @Override
     public Insets getBorderInsets(Component c) {
-        return new Insets(0,0,0,0); //Centre imagen
+        return new Insets(0, 0, 0, 0); //Centre imagen
     }
- 
-     @Override
+
+    @Override
     public boolean isBorderOpaque() {
         return false;
     }
- 
+
 }

@@ -1,0 +1,773 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Vistas;
+
+import Clases.Compras;
+import Clases.Clientes;
+import Clases.Utilidades;
+import Logica.DatosClientes;
+import Logica.DatosCompras;
+import java.awt.Color;
+import java.awt.HeadlessException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author Ana
+ */
+public class FormCompras extends javax.swing.JInternalFrame {
+
+    //Creamos variables
+    private DefaultTableModel modelo;
+    private String acc = "guardar";
+    private DatosCompras comp;
+    private Compras compras;
+    private Clientes cli;
+    private DatosClientes datcli;
+
+    @SuppressWarnings("OverridableMethodCallInConstructor")
+    public FormCompras() {
+        initComponents();
+        //Color JFrame en blanco
+        this.getContentPane().setBackground(Color.white);
+//        this.fillTable(""); //Mostrar los valores de la tabla
+        MostrarDatosTabla(""); //Mostrar los valores de la tabla
+        inhabilitar();
+
+    }
+
+//    //Para ocultar los campos id de las trablas
+//    void ocultar_columnas(){
+//       tablausu.getColumnModel().getColumn(0).setMaxWidth(0);
+//       tablausu.getColumnModel().getColumn(0).setMinWidth(0);
+//       tablausu.getColumnModel().getColumn(0).setPreferredWidth(0);
+//    }
+    //Inhabilitar los valores de las cajas
+    private void inhabilitar() {
+        txtidcompras.setEnabled(false);
+        txtnumfactura.setEnabled(false);
+        cmbproveedor.setEnabled(false);
+        txtconcepto.setEnabled(false);
+        txtfecha.setEnabled(false);
+        txtbase.setEnabled(false);
+        txttipoiva.setEnabled(false);
+        cmbamortizacion.setEnabled(false);
+
+        btnguardar.setEnabled(false);
+        btncancelar.setEnabled(false);
+        btnborrar.setEnabled(false);
+        //Limpiar campos
+        limpiar();
+    }
+
+    //Habilitar los valores de las cajas
+    private void habilitar() {
+        txtidcompras.setEnabled(true);
+        txtnumfactura.setEnabled(true);
+        cmbproveedor.setEnabled(true);
+        txtconcepto.setEnabled(true);
+        txtfecha.setEnabled(true);
+        txtbase.setEnabled(true);
+        txttipoiva.setEnabled(true);
+        cmbamortizacion.setEnabled(true);
+
+        btnguardar.setEnabled(true);
+        btncancelar.setEnabled(true);
+        btnborrar.setEnabled(true);
+
+        limpiar();
+    }
+
+    //Limpiar Campos
+    private void limpiar() {
+        txtidcompras.setText("");
+        txtnumfactura.setText("");
+        cmbproveedor.setSelectedIndex(0);
+        txtconcepto.setText("");
+        txtfecha.setText("");
+        txtbase.setText("");
+        txttipoiva.setText("");
+        cmbamortizacion.setSelectedIndex(0);
+
+    }
+
+    //LLenar tabla con ArrayList - Metodo dos
+//    private void fillTable(String buscar) {
+//        try {
+//            usu = new DatosUsuario();
+//            ArrayList<Usuarios> user = usu.getAllUsuarios(buscar);
+//            String columnas[] = {"Usuarios", "Nombre", "Apellidos", "Email", "Password", "Password2", "Perfil"};
+//            this.modelo = new DefaultTableModel(columnas, 0);
+//            this.tablausu.setModel(modelo);
+//
+//            for (Usuarios users : user){
+//               Object[] row = {
+//                   users.getIdusuarios(),
+//                   users.getNombre(),
+//                   users.getApellidos(),
+//                   users.getEmail(),
+//                   users.getPassword(),
+//                   users.getPassword(),
+//                   users.getPerfil()
+//               };
+//               this.modelo.addRow(row);
+//            }
+//
+//            lbltotalregistros.setText("Total Registros  " + Integer.toString(usu.totalRegistros));
+//        } catch (Exception e) {
+//            JOptionPane.showConfirmDialog(null, e);
+//        }
+//    }
+//
+    //Metodo buscar tabla con modelo - Metodo uno
+    private void MostrarDatosTabla(String buscar) {
+        try {
+            comp = new DatosCompras();
+            //Al modelo la tabla usuario y le pasamos el usuario a buscar
+            modelo = comp.CompTable(buscar);
+            //Añadimos a la tabla el modelo
+            tablacompras.setModel(modelo);
+            //Indicamos el total de registros obtenidos
+            lbltotalregistros.setText("Total Registros -----    " + Integer.toString(comp.totalRegistros));
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e);
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        lblnombre1 = new javax.swing.JLabel();
+        txtnumfactura1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        lblperfil = new javax.swing.JPanel();
+        lbidusuarios = new javax.swing.JLabel();
+        lblnombre = new javax.swing.JLabel();
+        txtidcompras = new javax.swing.JTextField();
+        lblapellidos = new javax.swing.JLabel();
+        txtconcepto = new javax.swing.JTextField();
+        lbidusuarios3 = new javax.swing.JLabel();
+        txtfecha = new javax.swing.JTextField();
+        lblpassword = new javax.swing.JLabel();
+        lblpassword2 = new javax.swing.JLabel();
+        cmbproveedor = new javax.swing.JComboBox<>();
+        lblemail = new javax.swing.JLabel();
+        btnnuevo = new javax.swing.JButton();
+        btnguardar = new javax.swing.JButton();
+        btncancelar = new javax.swing.JButton();
+        cmbamortizacion = new javax.swing.JComboBox<>();
+        lblnombre2 = new javax.swing.JLabel();
+        txtnumfactura = new javax.swing.JTextField();
+        txtbase = new javax.swing.JTextField();
+        txttipoiva = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablacompras = new javax.swing.JTable();
+        lblbuscar = new javax.swing.JLabel();
+        txtbuscar = new javax.swing.JTextField();
+        btnbuscar = new javax.swing.JButton();
+        btnborrar = new javax.swing.JButton();
+        btnsalir = new javax.swing.JButton();
+        lbltotalregistros = new javax.swing.JLabel();
+
+        lblnombre1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblnombre1.setForeground(new java.awt.Color(255, 255, 255));
+        lblnombre1.setText("Núm. de factura");
+
+        txtnumfactura1.setText(" ");
+        txtnumfactura1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnumfactura1ActionPerformed(evt);
+            }
+        });
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setTitle("Compras");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setName("FrUsuarios"); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel1.setText("Gestión de  Compras");
+        jLabel1.setToolTipText("");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        lblperfil.setBackground(new java.awt.Color(153, 0, 0));
+        lblperfil.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Registro de Compras", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        lbidusuarios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbidusuarios.setForeground(new java.awt.Color(255, 255, 255));
+        lbidusuarios.setText("Proveedor");
+
+        lblnombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblnombre.setForeground(new java.awt.Color(255, 255, 255));
+        lblnombre.setText("Id. Compra");
+
+        txtidcompras.setText(" ");
+        txtidcompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidcomprasActionPerformed(evt);
+            }
+        });
+
+        lblapellidos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblapellidos.setForeground(new java.awt.Color(255, 255, 255));
+        lblapellidos.setText("Concepto");
+
+        txtconcepto.setText(" ");
+        txtconcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtconceptoActionPerformed(evt);
+            }
+        });
+
+        lbidusuarios3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbidusuarios3.setForeground(new java.awt.Color(255, 255, 255));
+        lbidusuarios3.setText("Años amortización");
+
+        txtfecha.setText(" ");
+        txtfecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfechaActionPerformed(evt);
+            }
+        });
+
+        lblpassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblpassword.setForeground(new java.awt.Color(255, 255, 255));
+        lblpassword.setText("Base de la factura");
+
+        lblpassword2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblpassword2.setForeground(new java.awt.Color(255, 255, 255));
+        lblpassword2.setText("Tipo de IVA");
+
+        cmbproveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+
+        lblemail.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblemail.setForeground(new java.awt.Color(255, 255, 255));
+        lblemail.setText("Fecha");
+
+        btnnuevo.setBackground(new java.awt.Color(255, 255, 255));
+        btnnuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/Reservas.png"))); // NOI18N
+        btnnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnuevoActionPerformed(evt);
+            }
+        });
+
+        btnguardar.setBackground(new java.awt.Color(255, 255, 255));
+        btnguardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/save.png"))); // NOI18N
+        btnguardar.setText("Guardar");
+        btnguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnguardarActionPerformed(evt);
+            }
+        });
+
+        btncancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/cancel.png"))); // NOI18N
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
+
+        cmbamortizacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Administrador", "Empleado" }));
+
+        lblnombre2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblnombre2.setForeground(new java.awt.Color(255, 255, 255));
+        lblnombre2.setText("Núm. de factura");
+
+        txtnumfactura.setText(" ");
+        txtnumfactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnumfacturaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout lblperfilLayout = new javax.swing.GroupLayout(lblperfil);
+        lblperfil.setLayout(lblperfilLayout);
+        lblperfilLayout.setHorizontalGroup(
+            lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblperfilLayout.createSequentialGroup()
+                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblperfilLayout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lblperfilLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblapellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(lblperfilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblperfilLayout.createSequentialGroup()
+                        .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmbamortizacion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtfecha, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtconcepto, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(lblperfilLayout.createSequentialGroup()
+                                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtbase, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblperfilLayout.createSequentialGroup()
+                                        .addComponent(lblpassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(78, 78, 78))
+                                    .addComponent(txttipoiva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(lblperfilLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtidcompras, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(53, 53, 53)
+                                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblnombre2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtnumfactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblperfilLayout.createSequentialGroup()
+                                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblemail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbidusuarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbidusuarios3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(20, 20, 20))
+                    .addGroup(lblperfilLayout.createSequentialGroup()
+                        .addComponent(cmbproveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        lblperfilLayout.setVerticalGroup(
+            lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblperfilLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblperfilLayout.createSequentialGroup()
+                        .addComponent(lblnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtidcompras, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lblperfilLayout.createSequentialGroup()
+                        .addComponent(lblnombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtnumfactura, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbidusuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblapellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtconcepto, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblemail, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(lblperfilLayout.createSequentialGroup()
+                        .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtbase, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lblperfilLayout.createSequentialGroup()
+                        .addComponent(lblpassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txttipoiva, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)))
+                .addGap(18, 18, 18)
+                .addComponent(lbidusuarios3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbamortizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(lblperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnnuevo)
+                    .addComponent(btnguardar)
+                    .addComponent(btncancelar))
+                .addGap(30, 30, 30))
+        );
+
+        btnnuevo.getAccessibleContext().setAccessibleName("Nuevo");
+        btncancelar.getAccessibleContext().setAccessibleName("Cancelar");
+
+        jPanel1.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de compras", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        tablacompras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablacompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablacomprasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablacompras);
+
+        lblbuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblbuscar.setForeground(new java.awt.Color(255, 255, 255));
+        lblbuscar.setText("Buscar");
+
+        btnbuscar.setBackground(new java.awt.Color(255, 255, 255));
+        btnbuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/search.png"))); // NOI18N
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
+
+        btnborrar.setBackground(new java.awt.Color(255, 255, 255));
+        btnborrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/erase.png"))); // NOI18N
+        btnborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnborrarActionPerformed(evt);
+            }
+        });
+
+        btnsalir.setBackground(new java.awt.Color(255, 255, 255));
+        btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Archivos/Home.png"))); // NOI18N
+        btnsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalirActionPerformed(evt);
+            }
+        });
+
+        lbltotalregistros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbltotalregistros.setForeground(new java.awt.Color(255, 255, 255));
+        lbltotalregistros.setText("Total Registros");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblbuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnborrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnsalir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lbltotalregistros, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblbuscar)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnbuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnborrar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnsalir, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
+                .addComponent(lbltotalregistros, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        btnbuscar.getAccessibleContext().setAccessibleName("Buscar");
+        btnborrar.getAccessibleContext().setAccessibleName("Borrar");
+        lbltotalregistros.getAccessibleContext().setAccessibleName("Total Registros       ");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(333, 333, 333))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
+        //Habilitamos los campos
+        habilitar();
+        //Si el buton guardar contiene la etiqueta guardar
+        btnguardar.setText("Guardar");
+        //Usamos la accion guardar
+        acc = "guardar";
+    }//GEN-LAST:event_btnnuevoActionPerformed
+
+    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+        try {
+            //Validamos los campos
+            //Valor seleccionado del combobox
+            int selec = cmbproveedor.getSelectedIndex();
+
+            if (txtidcompras.getText().isEmpty()) {
+                JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un usuario", "Acceso a Usuarios", JOptionPane.ERROR_MESSAGE);
+                txtidcompras.requestFocus();
+                return;
+            }
+            if (txtidcompras.getText().isEmpty()) {
+                JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un nombre", "Acceso a Usuarios", JOptionPane.ERROR_MESSAGE);
+                txtidcompras.requestFocus();
+                return;
+            }
+            if (txtconcepto.getText().isEmpty()) {
+                JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un apellidos", "Acceso a Usuarios", JOptionPane.ERROR_MESSAGE);
+                txtconcepto.requestFocus();
+                return;
+            }
+            if (txtfecha.getText().isEmpty()) {
+                JOptionPane.showConfirmDialog(rootPane, "Debes ingresar un email", "Acceso a Usuarios", JOptionPane.ERROR_MESSAGE);
+                txtfecha.requestFocus();
+                return;
+            }
+
+            if (selec == 0) {
+                JOptionPane.showConfirmDialog(rootPane, "Debes seleccionar un perfil", "Acceso a Usuarios", JOptionPane.ERROR_MESSAGE);
+                cmbproveedor.requestFocus();
+                return;
+            }
+            //Instanciamos ambas clases
+            comp = new DatosCompras();
+            compras = new Compras();
+            //Recogo los datos de las cajas de texto
+            compras.setIDCompras(Integer.parseInt(txtidcompras.getText()));
+            compras.setIDProveedor(Integer.parseInt(cmbproveedor.getItemAt(selec)));
+            compras.setNumFactura(txtnumfactura.getText());
+            compras.setConcepto(txtconcepto.getText());
+            compras.setFecha(Utilidades.strintToDate(txtfecha.getText()));
+            compras.setBaseFactura(Double.parseDouble(txtbase.getText()));
+            compras.setTipoIVA(Double.parseDouble(txttipoiva.getText()));
+            compras.setAmortización(cmbamortizacion.getItemAt(selec));
+//Si la accion es guardar , ingreso el nuevo usuario y muestro el mensaje
+            if (acc.equals("guardar")) {
+                if (comp.nuevaCompra(compras)) {
+                    JOptionPane.showMessageDialog(rootPane, "Compra agregada correctamente");
+                    //Muestro los datos del nuevo usuario en la tabla
+                    MostrarDatosTabla("");
+                    //Inhabilito los campos
+                    inhabilitar();
+                }
+                //Si por el contrario la acción es editar. Tomamos el id del usuario
+            } else if (acc.equals("editar")) {
+                compras.setIDCompras(Integer.parseInt(txtidcompras.getText()));
+                //Modificamos el usuario y mostramos mensaje
+                if (comp.modificarCompra(compras)) {
+                    JOptionPane.showMessageDialog(rootPane, "Compra modificada correctamente");
+                    //Mostramos los datos modificados
+                    MostrarDatosTabla("");
+                    //Inhabilitamos datos
+                    inhabilitar();
+                }
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showConfirmDialog(null, e);
+        }
+    }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btncancelarActionPerformed
+
+    private void btnborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnborrarActionPerformed
+        try {
+            //Si el campo idusuarios es distinto de vacio, indicampos mensaje de seguridad al borrar
+            if (!txtidcompras.getText().equals("")) {
+                int confirmar = JOptionPane.showConfirmDialog(rootPane, "Seguro que quiere eliminar la compra", "Confirmar", 2);
+                if (confirmar == 0) {
+                    comp = new DatosCompras();
+                    compras = new Compras();
+                    //Tomamos el idusuarios y borramos el usuario
+                    compras.setIDCompras(Integer.parseInt(txtidcompras.getText()));
+                    comp.eliminarCompra(compras);
+                    MostrarDatosTabla(""); //Mostramos los cambios en la tabla
+                    inhabilitar();  //Inhabilitamos campos
+                }
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showConfirmDialog(null, e);
+        }
+    }//GEN-LAST:event_btnborrarActionPerformed
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+        //Al pulsar el boton buscar,capturamos la letra introducida y buscamos el usuario
+        MostrarDatosTabla(txtbuscar.getText());
+//        fillTable(txtbuscar.getText());
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void txtidcomprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidcomprasActionPerformed
+        txtidcompras.transferFocus();
+    }//GEN-LAST:event_txtidcomprasActionPerformed
+
+    private void txtconceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtconceptoActionPerformed
+        txtconcepto.transferFocus();
+    }//GEN-LAST:event_txtconceptoActionPerformed
+
+    private void txtfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfechaActionPerformed
+        txtfecha.transferFocus();
+    }//GEN-LAST:event_txtfechaActionPerformed
+
+    private void tablacomprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablacomprasMouseClicked
+        //Cuando haga click en la fila de la tabla los datos pasan a sus cajas de texto
+        //El botón guardar cambia el texto a Editar y la acción pasa a ser editar
+        btnguardar.setText("Editar");
+        //El botón borrar se inhabilita
+        btnborrar.setEnabled(true);
+        //Habilitamos los campos
+        habilitar();
+        //La acción pasa a ser editar
+        acc = "editar";
+        //Inhabilito el idusuarios al no poder modificarse por ser clave primaria
+        txtidcompras.setEnabled(false);
+        //Capturamos la fila q ha sido cliqueada
+        int fila = tablacompras.rowAtPoint(evt.getPoint());
+        //Tomamos los datos de la tabla y los pasamos a sus cajas de texto
+        txtidcompras.setText(tablacompras.getValueAt(fila, 0).toString());
+        txtnumfactura.setText(tablacompras.getValueAt(fila, 2).toString());
+        cmbproveedor.setSelectedItem(tablacompras.getValueAt(fila, 1).toString());
+        txtconcepto.setText(tablacompras.getValueAt(fila, 3).toString());
+        txtfecha.setText(tablacompras.getValueAt(fila, 4).toString());
+        txtbase.setText(tablacompras.getValueAt(fila, 5).toString());
+        txttipoiva.setText(tablacompras.getValueAt(fila, 6).toString());
+        cmbamortizacion.setSelectedItem(tablacompras.getValueAt(fila, 7).toString());
+
+    }//GEN-LAST:event_tablacomprasMouseClicked
+
+    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+        this.dispose(); //Salimos del sistema
+    }//GEN-LAST:event_btnsalirActionPerformed
+
+    private void txtnumfactura1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumfactura1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnumfactura1ActionPerformed
+
+    private void txtnumfacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumfacturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnumfacturaActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FormCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FormCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FormCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FormCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormCompras().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnborrar;
+    private javax.swing.JButton btnbuscar;
+    private javax.swing.JButton btncancelar;
+    private javax.swing.JButton btnguardar;
+    private javax.swing.JButton btnnuevo;
+    private javax.swing.JButton btnsalir;
+    private javax.swing.JComboBox<String> cmbamortizacion;
+    public static javax.swing.JComboBox<String> cmbproveedor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbidusuarios;
+    private javax.swing.JLabel lbidusuarios3;
+    private javax.swing.JLabel lblapellidos;
+    private javax.swing.JLabel lblbuscar;
+    private javax.swing.JLabel lblemail;
+    private javax.swing.JLabel lblnombre;
+    private javax.swing.JLabel lblnombre1;
+    private javax.swing.JLabel lblnombre2;
+    private javax.swing.JLabel lblpassword;
+    private javax.swing.JLabel lblpassword2;
+    private javax.swing.JPanel lblperfil;
+    private javax.swing.JLabel lbltotalregistros;
+    private javax.swing.JTable tablacompras;
+    private javax.swing.JTextField txtbase;
+    private javax.swing.JTextField txtbuscar;
+    private javax.swing.JTextField txtconcepto;
+    private javax.swing.JTextField txtfecha;
+    private javax.swing.JTextField txtidcompras;
+    private javax.swing.JTextField txtnumfactura;
+    private javax.swing.JTextField txtnumfactura1;
+    private javax.swing.JTextField txttipoiva;
+    // End of variables declaration//GEN-END:variables
+
+}
